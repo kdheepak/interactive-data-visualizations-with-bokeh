@@ -1,6 +1,7 @@
-.reveal .plot {
+.reveal .bk-root {
     position: relative;
     margin-left: auto;
     margin-right: auto;
     display: inline-block;
+    width: 50%;
  }

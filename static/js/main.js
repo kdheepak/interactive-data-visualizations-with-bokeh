@@ -1,53 +1,45 @@
 (function (exports) {
 
+    var plt = Bokeh.Plotting;
 
-    // create some data and a ColumnDataSource
-    var x = Bokeh.LinAlg.linspace(-0.5, 20.5, 10);
-    var y = x.map(function (v) { return v * 0.5 + 3.0; });
-    var source = new Bokeh.ColumnDataSource({ data: { x: x, y: y } });
+    // set up some data
+    var M = 100;
+    var xx = [];
+    var yy = [];
+    var colors = [];
+    var radii = [];
+    for (var y = 0; y <= M; y += 4) {
+        for (var x = 0; x <= M; x += 4) {
+            xx.push(x);
+            yy.push(y);
+            colors.push(plt.color(50+2*x, 30+2*y, 150));
+            radii.push(Math.random() * 0.4 + 1.7)
+        }
+    }
 
-    // create some ranges for the plot
-    var xdr = new Bokeh.Range1d({ start: -0.5, end: 20.5 });
-    var ydr = Bokeh.Range1d(-0.5, 20.5);
-
-    // make the plot
-    var plot = new Bokeh.Plot({
-        title: "BokehJS Plot",
-        x_range: xdr,
-        y_range: ydr,
-        plot_width: 400,
-        plot_height: 400,
-        background_fill_color: "#F2F2F7"
+    // create a data source
+    var source = new Bokeh.ColumnDataSource({
+        data: { x: xx, y: yy, radius: radii, colors: colors }
     });
 
-    // add axes to the plot
-    var xaxis = new Bokeh.LinearAxis({ axis_line_color: null });
-    var yaxis = new Bokeh.LinearAxis({ axis_line_color: null });
-    plot.add_layout(xaxis, "below");
-    plot.add_layout(yaxis, "left");
+    // make the plot and add some tools
+    var tools = "pan,wheel_zoom,box_zoom,reset,save,crosshair";
+    var p = plt.figure({title: "Colorful Scatter", tools: tools });
 
-    // add grids to the plot
-    var xgrid = new Bokeh.Grid({ ticker: xaxis.ticker, dimension: 0 });
-    var ygrid = new Bokeh.Grid({ ticker: yaxis.ticker, dimension: 1 });
-    plot.add_layout(xgrid);
-    plot.add_layout(ygrid);
-
-    // add a Line glyph
-    var line = new Bokeh.Line({
-        x: { field: "x" },
-        y: { field: "y" },
-        line_color: "#666699",
-        line_width: 2
+    // call the circle glyph method to add some circle glyphs
+    var circles = p.circle({ field: "x" }, { field: "y" }, {
+        source: source,
+        radius: radii,
+        fill_color: colors,
+        fill_alpha: 0.6,
+        line_color: null
     });
-    plot.add_glyph(line, source);
 
     // add the plot to a document and display it
     var doc = new Bokeh.Document();
-    doc.add_root(plot);
+    doc.add_root(p);
     var div = document.getElementById("plotTitleSlide");
     Bokeh.embed.add_document_standalone(doc, div);
-
-
 
 
 
