@@ -10,7 +10,7 @@
     var radii = [];
     for (var i = 0; i <= M; i += 1) {
             x.push(i);
-            y.push(i);
+            y.push(i * ( Math.random() * ( .2 ) + 0.9 ) );
         }
 
     // create a data source
@@ -19,7 +19,7 @@
     });
 
     // make the plot and add some tools
-    var tools = "pan,reset,save";
+    var tools = "pan,wheel_zoom,box_zoom,reset,save";
     var p = plt.figure({width: 400, height: 400, tools: tools,
         x_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0}),
         y_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0})
@@ -45,7 +45,9 @@
 
     setInterval(function(){
         if (i > 100) {
-            i = 0
+            setTimeout(function() {
+                i = 0
+            }, 1000)
         }
         i = i + 1
         source.data.x = x.slice(0, i)
@@ -54,10 +56,5 @@
     }, 50)
 
 
-    window.doc = doc
-    window.x = x
-    window.y = y
-    window.source = source
-    window.p = p
 
 }(window.slides = window.slides || {}));
