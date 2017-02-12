@@ -16,8 +16,8 @@
             data: {x: x, y: y}
         });
 
-        // make a figure 
-        var p = plt.figure({title: "Interactive " + M + " points visualization", width: 400, height: 400, tools: "pan,box_zoom,wheel_zoom,reset,save",
+        // make a figure
+        var p = plt.figure({title: "Interactive " + M + " points visualization", width: 400, height: 400, tools: "pan,box_zoom,wheel_zoom,lasso_select,reset,save",
             x_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0}),
             y_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0})
         });
@@ -50,7 +50,7 @@
             data: {x: x, y: y}
         });
 
-        // make a figure 
+        // make a figure
         var p = plt.figure({width: 400, height: 400, tools: false,
             x_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0}),
             y_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0})
