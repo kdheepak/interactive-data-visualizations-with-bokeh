@@ -53,7 +53,8 @@
                     y:10,
                     text: 'Press SPC to continue',
                     text_align: 'center',
-                    text_font_size: '14pt'
+                    text_font_size: '14pt',
+                    text_font: 'Courier'
                 })
             }
 
