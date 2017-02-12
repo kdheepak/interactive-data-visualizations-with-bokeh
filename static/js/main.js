@@ -4,34 +4,34 @@
 
     // set up some data
     var M = 100;
-    var xx = [];
-    var yy = [];
+    var x = [];
+    var y = [];
     var colors = [];
     var radii = [];
-    for (var y = 0; y <= M; y += 4) {
-        for (var x = 0; x <= M; x += 4) {
-            xx.push(x);
-            yy.push(y);
-            colors.push(plt.color(50+2*x, 30+2*y, 150));
-            radii.push(Math.random() * 0.4 + 1.7)
+    for (var i = 0; i <= M; i += 1) {
+            x.push(i);
+            y.push(i);
         }
-    }
 
     // create a data source
     var source = new Bokeh.ColumnDataSource({
-        data: { x: xx, y: yy, radius: radii, colors: colors }
+        data: {x: x, y: y}
     });
 
     // make the plot and add some tools
-    var tools = "pan,wheel_zoom,box_zoom,reset,save,crosshair";
-    var p = plt.figure({title: "Colorful Scatter", tools: tools });
+    var tools = "pan,reset,save";
+    var p = plt.figure({width: 400, height: 400, tools: tools,
+        x_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0}),
+        y_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0})
+    });
+    // p.x_range._initial_start = -5
+    // p.x_range._initial_end = 105
+    // p.y_range._initial_start = -5
+    // p.y_range._initial_end = 105
 
     // call the circle glyph method to add some circle glyphs
-    var circles = p.circle({ field: "x" }, { field: "y" }, {
+    var line = p.line({ field: "x" }, { field: "y" }, {
         source: source,
-        radius: radii,
-        fill_color: colors,
-        fill_alpha: 0.6,
         line_color: null
     });
 
@@ -41,6 +41,23 @@
     var div = document.getElementById("plotTitleSlide");
     Bokeh.embed.add_document_standalone(doc, div);
 
+    var i = 0
 
+    setInterval(function(){
+        if (i > 100) {
+            i = 0
+        }
+        i = i + 1
+        source.data.x = x.slice(0, i)
+        source.data.y = y.slice(0, i)
+        source.trigger('change')
+    }, 50)
+
+
+    window.doc = doc
+    window.x = x
+    window.y = y
+    window.source = source
+    window.p = p
 
 }(window.slides = window.slides || {}));
