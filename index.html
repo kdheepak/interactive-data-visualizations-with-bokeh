@@ -219,8 +219,81 @@
                         </ul>
                         <p class="fragment"> That's it! </p>
                     </section>
+
+                    <section>
+                        <p>Bokeh Server</p>
+                        <ul>
+                            <li>Uses websockets to allow real-time updates to visualizations</li>
+                        </ul>
+                    </section>
+
                 </section>
 
+                <section>
+                    <h4>Bokeh Interface</h4>
+                    <section>
+                        <p>Bokeh Python Code</p>
+                        <pre>
+from bokeh.plotting import figure, show, output_file
+from bokeh.sampledata.iris import flowers
+
+colormap = {'setosa': 'red',
+            'versicolor': 'green',
+            'virginica': 'blue'}
+colors = [colormap[x] for x in flowers['species']]
+
+p = figure(title = "Iris Morphology")
+p.xaxis.axis_label = 'Petal Length'
+p.yaxis.axis_label = 'Petal Width'
+
+p.circle(flowers["petal_length"], flowers["petal_width"],
+         color=colors, fill_alpha=0.2, size=10)
+
+output_file("iris.html", title="iris.py example")
+
+show(p)
+
+                        </pre>
+                    </section>
+                    <section>
+                        <p>Bokeh Python Output</p>
+                        <div class="bk-root">
+                            <div class="bk-plotdiv" id="c67cad4a-bbb9-45ef-a848-3166c8bb14f9"></div>
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <ul>
+                            <li>Data is stored in ColumnDataSource most of the time</li>
+                            <li>Allows for more declarative API</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <p>Bokeh Python High Level Interface - Charts</p>
+                        <a href="http://bokeh.pydata.org/en/latest/docs/reference/charts.html">Link</a>
+                    </section>
+
+                    <section>
+                        <p>Bokeh Python Low Level Interface - Models</p>
+                        <a href="http://bokeh.pydata.org/en/latest/docs/reference/models.html">Link</a>
+                        <p class="fragment"> One to one mapping between Python and Javascript models</p>
+                    </section>
+
+                    <section>
+                        <p>BokehJS Models and Views </p>
+
+                            <ul>
+                                <li>Based on Backbone.js</li>
+                                <li>Backbone Models store the state (data)</li>
+                                <li>Backbone Views know how to render the state (canvas API)</li>
+                                <li>Views listen to events and render on change</li>
+                            </ul>
+
+                    </section>
+
+                </section>
 
 
             </div>
@@ -230,6 +303,7 @@
     <script src="static/js/patches.js" charset="utf-8"></script>
     <script src="static/js/plots.js" charset="utf-8"></script>
     <script src="static/js/main.js" charset="utf-8"></script>
+    <script src="static/js/pybokehirisdemo.js" charset="utf-8"></script>
     <script>
 
 
