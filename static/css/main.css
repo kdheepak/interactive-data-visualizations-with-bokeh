@@ -6,4 +6,10 @@
     width: 50%;
  }
 
+.reveal .display-on-visible.current-fragment{
+    display: block;
+}
 
+.reveal .display-on-visible{
+    display: none;
+}

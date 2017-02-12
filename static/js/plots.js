@@ -1,4 +1,41 @@
 (function (exports) {
+    function largeDataPlot() {
+
+        var plt = Bokeh.Plotting;
+
+        // set up some data
+        var M = 5000;
+        var x = [];
+        var y = [];
+        // create a data source
+        for (var i = 0; i <= M; i += 1) {
+                x.push(Math.random() * 100 );
+                y.push(Math.random() * 100 );
+            }
+        var source = new Bokeh.ColumnDataSource({
+            data: {x: x, y: y}
+        });
+
+        // make a figure 
+        var p = plt.figure({title: "Interactive " + M + " points visualization", width: 400, height: 400, tools: "pan,box_zoom,wheel_zoom,reset,save",
+            x_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0}),
+            y_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0})
+        });
+
+        // call the line glyph method to add a line
+        var line = p.circle({ field: "x" }, { field: "y" }, {
+            source: source,
+        });
+
+        // add the plot to a document and display it
+        var doc = new Bokeh.Document();
+        doc.add_root(p);
+        var div = document.getElementById("plotLargeData");
+        Bokeh.embed.add_document_standalone(doc, div);
+
+    }
+
+
 
     function titlePlot() {
 
@@ -48,33 +85,35 @@
         var i = 0
         var text = null
         setInterval(function(){
-            if ( i == 49 ) {
-                text = text ? text : p.text({x:50,
-                    y:10,
-                    text: 'Press SPC to continue',
-                    text_align: 'center',
-                    text_font_size: '14pt',
-                    text_font: 'Courier'
-                })
+            if ( i == 100 ) {
+                setTimeout(function() {
+                    text = text ? text : p.text({x:50,
+                        y:10,
+                        text: 'Press SPC to continue',
+                        text_align: 'center',
+                        text_font_size: '14pt',
+                        text_font: 'Courier'
+                    })
+                }, 1000)
             }
 
             if (i > 100) {
 
                 setTimeout(function() {
                     i = 0
-                }, 2000)
+                }, 3000)
             }
             i = i + 1
             source.data.x = x.slice(0, i)
             source.data.y = y.slice(0, i)
             source.trigger('change')
         }, 50)
-    window.p = p
 
     }
 
 
     exports.titlePlot = titlePlot
+    exports.largeDataPlot = largeDataPlot
 
 }(window.plots = window.plots || {}));
 
