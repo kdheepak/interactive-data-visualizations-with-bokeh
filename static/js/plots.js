@@ -13,12 +13,16 @@
             data: {x: x, y: y}
         });
 
-        // make the plot and add some tools
-        var tools = "pan,wheel_zoom,box_zoom,reset,save";
-        var p = plt.figure({width: 400, height: 400, tools: tools,
+        // make a figure 
+        var p = plt.figure({width: 400, height: 400, tools: false,
             x_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0}),
             y_range: new Bokeh.DataRange1d({start: -5.0, end: 105.0})
         });
+
+        p._xaxis.visible = false;
+        p._yaxis.visible = false;
+        p.xgrid.grid_line_color = 'white';
+        p.ygrid.grid_line_color = 'white';
 
         // call the line glyph method to add a line
         var line = p.line({ field: "x" }, { field: "y" }, {
