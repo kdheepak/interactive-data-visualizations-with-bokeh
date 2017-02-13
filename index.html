@@ -11,7 +11,7 @@
 
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <link href="https://fonts.googleapis.com/css?family=Merriweather|Source+Code+Pro" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Arimo|Merriweather|Source+Code+Pro" rel="stylesheet">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
@@ -55,15 +55,55 @@
 
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
-                <section>
-                    <h3 id='title'>Interactive Data Visualizations with Bokeh</h3>
-                    <div class='bk-root'>
-                        <div id="plotTitleSlide" class="bk-plotdiv"></div>
+                <section data-background-color="#000000">
+                    <h3 style="text-align: right;">
+                        <b>Interactive</b>
+                    </h3>
+                    <h3 style="text-align: right;">
+                        <b>Data Visualizations</b>
+                    </h3>
+                    <h3 style="text-align: right;">
+                        <b>with</b>
+                    </h3>
+                    <h3 style="text-align: right;">
+                        <b>
+                    <font color="#fa1010">Bokeh</font></b>
+                    </h3>
+                    <div style="position: absolute;
+    top: 0%;
+    text-align: left;">
+                        <div class='bk-root'>
+                            <div id="plotTitleSlide" class="bk-plotdiv"></div>
+                        </div>
                     </div>
                 </section>
                 <section>
+                    <section data-background-color="#000000">
+                        <h4 style="position: absolute;z-index: 0;    text-shadow: 1.5px 0 0 #000, 0 -1.5px 0 #000, 0 1.5px 0 #000, -1.5px 0 0 #000;
+">What is Bokeh?</h4>
+                        <div class="fragment">
+                        <img src="static/img/bokeh-004.jpg" style="position: absolute;top: -500%;
+    left: -50%; max-width: none; max-height: none; margin: 0px; border: none;">
+                        </div>
+                    </section>
+
                     <section>
-                        <h4>What is Bokeh?</h4>
+                        <p style="font-style: italic; position:absolute; top:50%;" >Bokeh is the aesthetic quality of the blur produced in the out-of-focus parts of an image produced by a lens.<p>
+                    </section>
+
+                    <section data-background-color="rgba( 22, 152, 213, 0.6 )">
+                        <h4>
+                            So what is Bokeh?
+                        </h4>
+                    </section>
+
+                    <section>
+                        <p style="font-style: italic">"allows users the flexibility to focus on the most important data without losing track of the rich context that allows it to be understood."<p>
+                        <p style="text-align: right">
+                        <a href="http://bokehplots.com/pages/technical-vision.html">
+                            - bokeh.pydata.org
+                        </a>
+                        </p>
                     </section>
 
                     <section>
@@ -152,7 +192,7 @@
 
                 <section>
 
-                    <section>
+                    <section data-background-color="#146287">
                         <h4>Aside : Imperative vs Declarative</h4>
                     </section>
 
@@ -341,9 +381,10 @@ show(p)
 
         //run reveal.js
         Reveal.initialize({
-            controls: true,
+            controls: false,
             progress: true,
-            slideNumber: true,
+            history: true,
+            showNotes: true,
             transitionSpeed: 'fast', // default/fast/slow
             theme: Reveal.getQueryHash().theme || 'white',
             transition: Reveal.getQueryHash().transition || 'slide',

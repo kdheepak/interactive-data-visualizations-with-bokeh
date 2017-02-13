@@ -58,14 +58,17 @@
 
         p._xaxis.visible = false;
         p._yaxis.visible = false;
-        p.xgrid.grid_line_color = 'white';
-        p.ygrid.grid_line_color = 'white';
+        p.xgrid.visible = false; // grid_line_color = 'white';
+        p.ygrid.visible = false; // .grid_line_color = 'white';
+        p.background_fill_color = "#f5f5dc"
+        p.border_fill_color = "black"
 
         // call the line glyph method to add a line
         var line = p.line({ field: "x" }, { field: "y" }, {
             source: source,
-            line_color: 'red'
+            line_color: '#b90504'
         });
+
 
         // add the plot to a document and display it
         var doc = new Bokeh.Document();
