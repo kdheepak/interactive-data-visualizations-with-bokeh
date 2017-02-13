@@ -22,12 +22,12 @@ body {
 
 ::selection {
   color: #fff;
-  background: #98bdef;
+  background: #fa1010;
   text-shadow: none; }
 
 ::-moz-selection {
   color: #fff;
-  background: #98bdef;
+  background: #fa1010;
   text-shadow: none; }
 
 .reveal .slides > section,
@@ -47,7 +47,7 @@ body {
   margin: 0 0 20px 0;
   color: #ffffff;
   font-family: 'Arimo', sans-serif; "Merriweather", serif, "Source Sans Pro", Helvetica, sans-serif;
-  font-weight: 600;
+  font-weight: 200;
   line-height: 1.2;
   letter-spacing: normal;
   text-shadow: none;
