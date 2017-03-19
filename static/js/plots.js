@@ -234,7 +234,7 @@
         }
         store[msg.from]['body'].push(msg.body)
         if (body.toLowerCase().includes('languages:')) {
-            var l = body.split(":")[1].trim().split(',')
+            var l = body.split(":")[1].trim().replace(/\,$/, '').split(',')
             for(var i=0; i<l.length; i++){
                 if(l[i].length>10) {
                     l[i] = l[i].slice(0, 10) + '...'
@@ -243,7 +243,7 @@
             store[msg.from]['languages'] = l
         }
         if (body.toLowerCase().includes('libraries:')) {
-            var l = body.split(":")[1].trim().split(',')
+            var l = body.split(":")[1].trim().replace(/\,$/, '').split(',')
             for(var i=0; i<l.length; i++){
                 if(l[i].length>10) {
                     l[i] = l[i].slice(0, 10) + '...'
