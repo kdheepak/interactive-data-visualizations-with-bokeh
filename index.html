@@ -481,7 +481,9 @@ cd notebooks
                     </section>
 
                     <section>
-                        <p>BokehJS</p>
+                        <p>
+                            <b><a href="https://github.com/bokeh/bokeh/tree/master/bokehjs"><font color="#00ffaa">Bokeh</font>JS</a></b>
+                        </p>
                         <ul>
                             <li>Dynamic plotting engine</li>
                             <li>Consumes JSON to produce visualizations</li>
@@ -490,15 +492,103 @@ cd notebooks
                     </section>
 
                     <section>
-                        <p>Bokeh Python</p>
-                        <ul>
-                            <li>Generates the JSON "scenegraph"</li>
-                        </ul>
-                        <p class="fragment"> That's it! </p>
+                        <p>
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            Python
+                        </p>
+                        <div style="width: 20%; float: left;">
+                            <div style="font-size: 25px; margin-top: 50px">
+                                <ul>
+                                    <li>Generates the JSON "scenegraph"</li>
+                                </ul>
+                                <p class="fragment"> That's it! </p>
+                            </div>
+                        </div>
+                        <div style="float: left; width: 80%">
+                            <pre style="font-size: 0.35em;">
+                                <code>
+from bokeh.plotting import figure
+p = figure(width=300, height=300)
+p.to_json(include_defaults=False)
+                                </code>
+                            </pre>
+                            <pre style="font-size: 0.35em;">
+                                <code>
+{u'below': [{u'id': u'f06c6d6c-4f5f-498d-8c0e-1462aa483c72',
+   u'type': u'LinearAxis'}],
+ u'id': u'e5f5ef3e-308b-4f5d-9e0f-cf6cd7d9c3b6',
+ u'left': [{u'id': u'5ebe63b6-f974-40bd-906e-38e4bbd3336c',
+   u'type': u'LinearAxis'}],
+ u'plot_height': 300,
+ u'plot_width': 300,
+ u'renderers': [{u'id': u'f06c6d6c-4f5f-498d-8c0e-1462aa483c72',
+   u'type': u'LinearAxis'},
+  {u'id': u'86e925b0-4f6f-43f4-8ccc-9231a87679f6', u'type': u'Grid'},
+  {u'id': u'5ebe63b6-f974-40bd-906e-38e4bbd3336c', u'type': u'LinearAxis'},
+  {u'id': u'13aca088-e607-468d-acdd-1b893480efd7', u'type': u'Grid'},
+  {u'id': u'3a813ff1-4089-4ee5-967a-a3d85c104a1d', u'type': u'BoxAnnotation'}],
+ u'title': {u'id': u'e23af6b7-6182-4264-b3ba-fe33afaf9a09', u'type': u'Title'},
+ u'tool_events': {u'id': u'85db6e96-670c-4869-96b4-f3b43b5e0466',
+  u'type': u'ToolEvents'},
+ u'toolbar': {u'id': u'd0f28e52-7d97-4b23-8fa7-332c091551d1',
+  u'type': u'Toolbar'},
+ u'x_range': {u'id': u'25c6d0bd-b92d-4bb7-b1c4-762c6e6f8a48',
+  u'type': u'DataRange1d'},
+ u'y_range': {u'id': u'b786bc47-eb71-4f16-a2bc-06a0887d7092',
+  u'type': u'DataRange1d'}}
+                                </code>
+                            </pre>
+                        </div>
                     </section>
 
                     <section>
-                        <p>Bokeh Server</p>
+                        <p>
+                            <b><font color="#00ffaa">Bokeh</font>JS</b>
+                        </p>
+                        <img src='static/img/bokeh.png' alt='Source - Continuum Analytics' style='max-width: 50%;max-height: 50%;'/>
+                    </section>
+
+                    <section>
+                        <p>
+                            <b><font color="#00ffaa">Bokeh</font>JS</b>
+                            Models and Views
+                        </p>
+                            <ul>
+                                <li>Based on Backbone.js</li>
+                                <li>Backbone Models store the state (data)</li>
+                                <li>Backbone Views know how to render the state (canvas API)</li>
+                                <li>Views listen to events and render on change</li>
+                            </ul>
+                    </section>
+
+                    <section>
+                        <p>
+                            <b><font color="#00ffaa">Bokeh</font> and <a href="https://www.w3schools.com/html/html5_canvas.asp">Canvas</a></b>
+                        </p>
+                        <div style="width: 50%; float: left;">
+                            <pre style="font-size: 0.35em;">
+                                <code>
+//javascript
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.arc(95,50,40,0,2*Math.PI);
+ctx.stroke();
+                                </code>
+                            </pre>
+                        </div>
+                        <div style="float: left; width: 50%">
+                            <div style="font-size: 25px; margin-top: 50px">
+                                <canvas id="myCanvas" width="200" height="100"></canvas>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <p>
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            Server
+                        </p>
                         <ul>
                             <li>Uses websockets to allow real-time updates to visualizations</li>
                         </ul>
@@ -507,89 +597,113 @@ cd notebooks
                 </section>
 
                 <section>
-                    <h4><a href="http://nbviewer.jupyter.org/github/bokeh/bokeh-notebooks/tree/master/tutorial/">Demo</a></h4>
+                    <section>
+                        <h2>
+                            How does <b><font color="#00ffaa">Bokeh</font></b> compare to ...
+                        </h2>
+                    </section>
+                    <section>
+                        <p>
+                            matplotlib
+                        </p>
+                        <ul>
+                            <li>Static visualizations</li>
+                            <li>Low level event based interactivity available for native data exploration</li>
+                            <li>Extremely powerful framework, and others have built on top of it - Pandas, Seaborn</li>
+                            <li>Not well suited for the web currently - this will change after Matplotlib 2.0 JSON API is further developed</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>
+                            ggplot2
+                        </p>
+                        <ul>
+                            <li>Highly polished Grammar of Graphics interface</li>
+                            <li>Animation/interactivity using other libraries (gganimate, shiny)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>
+                            d3.js
+                        </p>
+                        <ul>
+                            <li>Purely functional style programming</li>
+                            <li>Solves complicated math for the web</li>
+                            <li>Powerful SVG interaction and transition effects, and growing Canvas support</li>
+                            <li>v4 has made it modular, but backward incompatible</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p>
+                            plotly
+                        </p>
+                        <ul>
+                            <li>Available as PlotlyJS</li>
+                            <li>Available in Python, R, MATLAB</li>
+                            <li>Great SVG interaction (built on d3) and WebGL support for 3-D plots</li>
+                            <li>Offline version available</li>
+                        </ul>
+                    </section>
                 </section>
 
                 <section>
                     <section>
-                        <h4>Bokeh Interface</h4>
+                        <h2>
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            <a href="http://bokeh.pydata.org/en/latest/docs/user_guide/charts.html">High Level Interface</a>
+                        </h2>
                     </section>
 
                     <section>
-                        <p>Bokeh Python Code</p>
-                        <pre>
-from bokeh.plotting import figure, show, output_file
-from bokeh.sampledata.iris import flowers
-
-colormap = {'setosa': 'red',
-            'versicolor': 'green',
-            'virginica': 'blue'}
-colors = [colormap[x] for x in flowers['species']]
-
-p = figure(title = "Iris Morphology")
-p.xaxis.axis_label = 'Petal Length'
-p.yaxis.axis_label = 'Petal Width'
-
-p.circle(flowers["petal_length"], flowers["petal_width"],
-         color=colors, fill_alpha=0.2, size=10)
-
-output_file("iris.html", title="iris.py example")
-
-show(p)
-
-                        </pre>
-                    </section>
-                    <section>
-                        <p>Bokeh Python Output</p>
-                        <div class="bk-root">
-                            <div class="bk-plotdiv" id="c67cad4a-bbb9-45ef-a848-3166c8bb14f9"></div>
-                        </div>
-                    </section>
-
-
-                    <section>
-                        <ul>
-                            <li>Data is stored in ColumnDataSource most of the time</li>
-                            <li>Allows for more declarative API</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <p>Bokeh Python High Level Interface - Charts</p>
-                        <a href="http://bokeh.pydata.org/en/latest/docs/reference/charts.html">Link</a>
-                    </section>
-
-                    <section>
-                        <p>Bokeh Python Low Level Interface - Models</p>
-                        <a href="http://bokeh.pydata.org/en/latest/docs/reference/models.html">Link</a>
+                        <h2>
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            <a href="http://bokeh.pydata.org/en/latest/docs/reference/models.html">Low Level Interface</a>
+                        </h2>
                         <p class="fragment"> One to one mapping between Python and Javascript models</p>
                     </section>
 
                     <section>
-                        <p>BokehJS Models and Views </p>
-
-                            <ul>
-                                <li>Based on Backbone.js</li>
-                                <li>Backbone Models store the state (data)</li>
-                                <li>Backbone Views know how to render the state (canvas API)</li>
-                                <li>Views listen to events and render on change</li>
-                            </ul>
-
+                        <h2>
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            <a href="https://github.com/bokeh/bokeh">Source</a>
+                        </h2>
                     </section>
-
                 </section>
 
                 <section>
                     <section>
-                        <h4> Other features </h4>
+                        <h2>
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            Integration with <a href="http://datashader.readthedocs.io/en/latest/">DataShader</a>
+                        </h2>
+                        <p>
+                            <img src='https://raw.githubusercontent.com/bokeh/datashader/master/docs/images/usa_census.jpg'/>
+                        </p>
                     </section>
-
                     <section>
-                        <div class="bk-root">
-                            <div class="bk-plotdiv" id="f6e7a999-89c5-4677-84d8-020be8abce3a"></div>
-                        </div>
+                        <h2>
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            Integration with <a href="http://dask.pydata.org">Dask</a>
+                        </h2>
+                        <p>
+                            <img src='https://raw.githubusercontent.com/dask/dask-org/master/images/daskboard.gif'/>
+                        </p>
                     </section>
+                    <section>
+                        <h2>
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            Integration with <a href="http://holoviews.org/">HoloViews</a>
+                        </h2>
+                        <p>
+                            <img src='https://camo.githubusercontent.com/c56505ce525022c2ff3e6a74cda0e148f6295d58/687474703a2f2f6173736574732e686f6c6f76696577732e6f72672f64656d6f2e676966'/>
+                        </p>
+                    </section>
+                </section>
 
+                <section>
+                    <section>
+                        <h4><a href="http://nbviewer.jupyter.org/github/bokeh/bokeh-notebooks/tree/master/tutorial/">Additional Resources</a></h4>
+                    </section>
                 </section>
 
 
@@ -600,6 +714,7 @@ show(p)
     <script src="static/js/plots.js" charset="utf-8"></script>
     <script src="static/js/pybokehirisdemo.js" charset="utf-8"></script>
     <script src="static/js/pybokehbrushingdemo.js" charset="utf-8"></script>
+    <script src="static/js/canvasExamples.js" charset="utf-8"></script>
     <script>
 
 
