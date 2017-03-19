@@ -243,7 +243,7 @@
                     l[i] = l[i].slice(0, 10) + '...'
                 }
             }
-            store[msg.from]['languages'] = l
+            store[msg.from]['languages'] = l.filter( onlyUnique )
         }
         if (body.toLowerCase().includes('libraries:')) {
             var l = body.split(":")[1].trim().replace(/\,$/, '').split(',').filter( onlyUnique ).filter(String)
@@ -252,7 +252,7 @@
                     l[i] = l[i].slice(0, 10) + '...'
                 }
             }
-            store[msg.from]['libraries'] = l
+            store[msg.from]['libraries'] = l.filter( onlyUnique )
         }
         localStorage['store'] = JSON.stringify(store)
     }
