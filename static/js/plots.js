@@ -72,6 +72,7 @@
           plot.add_tools(new Bokeh.WheelZoomTool())
           plot.add_tools(new Bokeh.PanTool())
           plot.add_tools(new Bokeh.BoxZoomTool())
+          plot.add_tools(new Bokeh.ResetTool())
 
           plot.x_range.range_padding = 10
 
@@ -139,12 +140,13 @@
           plot.add_tools(new Bokeh.WheelZoomTool())
           plot.add_tools(new Bokeh.PanTool())
           plot.add_tools(new Bokeh.BoxZoomTool())
+          plot.add_tools(new Bokeh.ResetTool())
 
           plot.x_range.range_padding = 10
 
         p2 = plot
 
-        var p = new Bokeh.Column({children: [p1, p2]})
+        var p = new Bokeh.Column({children: [p2, p1]})
 
         // add the plot to a document and display it
         var doc = new Bokeh.Document();

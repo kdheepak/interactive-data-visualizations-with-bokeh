@@ -30,8 +30,6 @@
 
         Reveal.addEventListener( 'slidechanged', function( event ) {
             // event.previousSlide, event.currentSlide, event.indexh, event.indexv
-            console.log(event.indexh, event.indexv)
-
             if ( data[[event.indexh, event.indexv]] === undefined ) {
                 data[[event.indexh, event.indexv]] = []
             }
