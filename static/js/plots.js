@@ -225,6 +225,9 @@
         window.source = source
 
     }
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
 
     function smsCallback( msg ) {
         body = msg.body.replace(/\s/g, '').replace(/[^\x00-\x7F]/g, "");
@@ -234,8 +237,8 @@
         }
         store[msg.from]['body'].push(msg.body)
         if (body.toLowerCase().includes('languages:')) {
-            var l = body.split(":")[1].trim().replace(/\,$/, '').split(',')
-            for(var i=0; i<l.length; i++){
+            var l = body.split(":")[1].trim().replace(/\,$/, '').split(',').filter( onlyUnique ).filter(String)
+            for(var i=0; (i<l.length && i<10); i++){
                 if(l[i].length>10) {
                     l[i] = l[i].slice(0, 10) + '...'
                 }
@@ -243,8 +246,8 @@
             store[msg.from]['languages'] = l
         }
         if (body.toLowerCase().includes('libraries:')) {
-            var l = body.split(":")[1].trim().replace(/\,$/, '').split(',')
-            for(var i=0; i<l.length; i++){
+            var l = body.split(":")[1].trim().replace(/\,$/, '').split(',').filter( onlyUnique ).filter(String)
+            for(var i=0; (i<l.length && i<10); i++){
                 if(l[i].length>10) {
                     l[i] = l[i].slice(0, 10) + '...'
                 }
