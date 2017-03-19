@@ -314,7 +314,11 @@ artists = list()
 legends = list()
 for k in data['species'].unique():
     s = data.loc[data['species']==k]
-    a = ax.scatter(s['petal_length'], s['petal_width'], marker=markers[k], edgecolor=colors[k], facecolor=colors[k])
+    a = ax.scatter(s['petal_length'],
+                    s['petal_width'],
+                    marker=markers[k],
+                    edgecolor=colors[k],
+                    facecolor=colors[k])
     legends.append(k)
     artists.append(a)
 
@@ -334,8 +338,6 @@ ax.legend(artists, legends, loc='upper left')
                                   <pre style="font-size: 0.35em;">
                                       <code>
 from bokeh.charts import Scatter, output_notebook, show
-from bokeh.sampledata.iris import flowers as data
-from bokeh.embed import components
 scatter = Scatter(data, x='petal_length', y='petal_width',
                 color='species', marker='species',
                 title='Iris Dataset Color and Marker by Species',
@@ -345,7 +347,7 @@ show(scatter)
                             </div>
                         </div>
                         <div style="float: left; width: 50%">
-                            <a href="/notebooks/iris_standalone.html" target="_blank">
+                            <a href="/downloads/iris_standalone.html" target="_blank">
                                 <img src="/static/img/iris-bokeh.png">
                             </a>
                         </div>
@@ -362,7 +364,9 @@ show(scatter)
 
                 <section>
                     <section>
-                        <h4>Why Bokeh?</h4>
+                        <h2>Why
+                            <b><font color="#00ffaa">Bokeh</font>?</b>
+                        </h2>
                     </section>
 
                     <section >
@@ -371,7 +375,7 @@ show(scatter)
                     </section>
 
                     <section>
-                        <p>Rendering using Canvas (and WebGL)</p>
+                        <p>Works with small to medium sized data</p>
                         <div class='bk-root'>
                             <div id="plotLargeData" class="bk-plotdiv"></div>
                         </div>
@@ -380,14 +384,76 @@ show(scatter)
                     <section>
                         <p>Real time two way server side interaction</p>
                         <video loop autoplay controls="controls" width="400" height="400" name="Animated" src="static/img/animated.mov"></video>
-                        <p><a href="https://localhost:5006/animated">Link</a></p>
                     </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>
+                            <b><font color="#00ffaa">Bokeh</font></b> Live Demo
+                        </h2>
+                    </section>
+                    <section>
+                        <h2>
+                            Install <b><font color="#00ffaa">Bokeh</font></b>
+                        </h2>
+                                  <pre style="font-size: 0.35em;">
+                                      <code>
+### Install Anaconda/Miniconda
+### Open Terminal on Mac or Command Prompt on Windows
+conda install bokeh
+conda install jupyter # (optional but recommended)
 
+# OR
+
+### Install Anaconda/Miniconda/pip
+### Open Terminal on Mac or Command Prompt on Windows
+pip install bokeh
+pip install jupyter # (optional but recommended)
+                                  </code></pre>
+
+                    </section>
+                    <section>
+                        <h2>
+                            <a href="https://github.com/kdheepak/interactive-data-visualizations-with-bokeh">Download notebooks</a> or Clone repository
+                        </h2>
+                                  <pre style="font-size: 0.35em;">
+                                      <code>
+git clone https://github.com/kdheepak/interactive-data-visualizations-with-bokeh.git
+cd interactive-data-visualizations-with-bokeh
+cd notebooks
+                                      </code>
+                                  </pre>
+
+                    </section>
+                    <section>
+                            <p>
+                                <a href="http://nbviewer.jupyter.org/github/kdheepak/interactive-data-visualizations-with-bokeh/blob/gh-pages/notebooks/LiveDemo.ipynb">
+                                    Live Demo
+                                </a>
+                            </p>
+                            <!--
+                            <aside class="notes">
+                                Start with `from bokeh.plotting import figure`. If you need more customization you can use Plot.
+                                ColumnDataSource is useful.
+                            </aside>
+                            -->
+                    </section>
+                    <section>
+                            <ul>
+                                <li>Tools</li>
+                                <li>CustomJS</li>
+                                <li>Bokeh Server</li>
+                            </ul>
+                    </section>
                 </section>
 
                 <section>
                     <section>
-                        <h4>So how does Bokeh work?</h4>
+                        <h2>
+                            So how does
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            work?
+                        </h2>
                     </section>
 
                     <section>
