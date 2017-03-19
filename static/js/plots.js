@@ -1,6 +1,6 @@
 (function (exports) {
-
-    var store = {"no":{"body":["Languages: python"],"languages":["Python", "R", "matlab", "javascript"],"libraries":["d3.js","matplotlib","bokeh","plotly"]}}
+    var string_store = JSON.stringify({"no":{"body":["Languages: python"],"languages":["Python","matlab","javascript"],"libraries":["d3.js","matplotlib","bokeh","plotly"]}})
+    var store = JSON.parse(localStorage['store'] || string_store)
 
     function surveyPlot() {
 
@@ -69,10 +69,6 @@
           plot.add_renderers.apply(plot, renderers);
           plot.add_layout(yaxis, "left");
           plot.add_layout(xaxis, "below");
-          plot.add_tools(new Bokeh.WheelZoomTool())
-          plot.add_tools(new Bokeh.PanTool())
-          plot.add_tools(new Bokeh.BoxZoomTool())
-          plot.add_tools(new Bokeh.ResetTool())
 
           plot.x_range.range_padding = 10
 
@@ -137,10 +133,6 @@
           plot.add_renderers.apply(plot, renderers);
           plot.add_layout(yaxis, "left");
           plot.add_layout(xaxis, "below");
-          plot.add_tools(new Bokeh.WheelZoomTool())
-          plot.add_tools(new Bokeh.PanTool())
-          plot.add_tools(new Bokeh.BoxZoomTool())
-          plot.add_tools(new Bokeh.ResetTool())
 
           plot.x_range.range_padding = 10
 
@@ -242,11 +234,24 @@
         }
         store[msg.from]['body'].push(msg.body)
         if (body.toLowerCase().includes('languages:')) {
-            store[msg.from]['languages'] = body.split(":")[1].trim().split(',')
+            var l = body.split(":")[1].trim().split(',')
+            for(var i=0; i<l.length; i++){
+                if(l[i].length>10) {
+                    l[i] = l[i].slice(0, 10) + '...'
+                }
+            }
+            store[msg.from]['languages'] = l
         }
         if (body.toLowerCase().includes('libraries:')) {
-            store[msg.from]['libraries'] = body.split(":")[1].trim().split(',')
+            var l = body.split(":")[1].trim().split(',')
+            for(var i=0; i<l.length; i++){
+                if(l[i].length>10) {
+                    l[i] = l[i].slice(0, 10) + '...'
+                }
+            }
+            store[msg.from]['libraries'] = l
         }
+        localStorage['store'] = JSON.stringify(store)
     }
 
     function largeDataPlot() {
