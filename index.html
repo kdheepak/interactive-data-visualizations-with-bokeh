@@ -288,44 +288,69 @@
                     </section>
 
                     <section>
-<div style="background-color: rgb(20, 98, 135); width: 100%; height: 400%; position: absolute; top: -100%; left: -45%; z-index: -1;">
-</div>
-<div>
-    <div style="width: 50%; display: inline-block; margin-right: 5%; vertical-align: top;">
-        <p style="text-align: left; font-size: small;">
-  <pre style="width: 160%;
-    margin: 20px auto 20px -75%;
-    text-align: left;
-    font-size: 0.35em;"><code>
+                        <div style="width: 50%; float: left;">
+                            <div style="font-size: 25px; margin-top: 50px">
+                                  <pre style="font-size: 0.35em;">
+                                      <code>
 # MATPLOTLIB
+import matplotlib.pyplot as plt
+import matplotlib
+import matplotlib.cm as cm
+import matplotlib.patches as patches
+
+N = len(data['species'].unique())
+cmap = cm.jet(pd.np.linspace(0, 1, num=N))
+colors = {k: cmap[i] for i, k in enumerate(data['species'].unique())}
+
+mmap = ['o', 's', '^']
+markers = {k: mmap[i] for i, k in enumerate(data['species'].unique())}
+
+data['color'] = data['species'].apply(lambda x: colors[x])
+data['marker'] = data['species'].apply(lambda x: markers[x])
+
 fig, ax = plt.subplots(1, 1, figsize=(7.5, 5))
-for k in ts.kind.unique():
-    tmp = ts[ts.kind == k]
-    ax.plot(tmp.dt, tmp.value, label=k)
-ax.set(xlabel='Date', ylabel='Value', title='Random Timeseries')
-ax.legend(dfp.columns, loc=2)
-fig.autofmt_xdate()
-  </code></pre>
-        </p>
-    </div>
-    <div style="width: 40%; display: inline-block;">
-        <p>
-        </p>
-    </div>
-</div>
-<div>
-    <div style="width: 50%; display: inline-block; margin-right: 5%; vertical-align: top;">
-    </div>
-    <div style="width: 40%; display: inline-block;">
-    </div>
-</div>
-<div >
-    <div style="width: 50%; display: inline-block; margin-right: 5%; vertical-align: top;">
-    </div>
-    <div style="width: 40%; display: inline-block;">
-    </div>
-</div>
+
+artists = list()
+legends = list()
+for k in data['species'].unique():
+    s = data.loc[data['species']==k]
+    a = ax.scatter(s['petal_length'], s['petal_width'], marker=markers[k], edgecolor=colors[k], facecolor=colors[k])
+    legends.append(k)
+    artists.append(a)
+
+ax.set_xlabel('petal_length')
+ax.set_ylabel('petal_width')
+ax.legend(artists, legends, loc='upper left')
+                                  </code></pre>
+                            </div>
+                        </div>
+                        <div style="float: left; width: 50%">
+                            <img src='./static/img/iris-matplotlib.png'>
+                        </div>
                     </section>
+                        <section>
+                        <div style="width: 50%; float: left;">
+                            <div style="font-size: 25px; margin-top: 50px">
+                                  <pre style="font-size: 0.35em;">
+                                      <code>
+from bokeh.charts import Scatter, output_notebook, show
+from bokeh.sampledata.iris import flowers as data
+from bokeh.embed import components
+scatter = Scatter(data, x='petal_length', y='petal_width',
+                color='species', marker='species',
+                title='Iris Dataset Color and Marker by Species',
+                legend=True)
+show(scatter)
+                                  </code></pre>
+                            </div>
+                        </div>
+                        <div style="float: left; width: 50%">
+                            <div class="bk-root">
+                                <div class="bk-plotdiv" id="a5b4ea65-4716-4483-bc32-84ab3262173e"></div>
+                            </div>
+                        </div>
+                    </section>
+
 
                     <section>
                         <h5>A Dramatic Tour through Python's Data Visualization Landscape</h5>
