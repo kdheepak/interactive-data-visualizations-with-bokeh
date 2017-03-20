@@ -283,120 +283,6 @@
                 </section>
 
                 <section>
-
-                    <section>
-                        <h2 style="text-align: left;">
-                            <b>Aside</b>
-                        </h2>
-                        <div class="fragment">
-                            <p style="text-align: left;">
-                            <b><font color="#ffaa00">Imperative</font></b>
-                            <b>vs</b>
-                            <b><font color="##aa00ff">Declarative</font></b>
-                        </div>
-                    </section>
-
-                    <section>
-                        <ul>
-                            <li>
-                                <b><font color="#ffaa00">Imperative</font></b>
-                                interface: the "how"
-                                <ul>
-                                    <li>e.g. d3.js, matplotlib</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <b><font color="#0055ff">Declarative</font></b>
-                                interface: the "what"
-                                <ul>
-                                    <li>e.g. seaborn, ggplot, altair</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <p class="fragment" data-fragment-index="0">
-                            <b><font color="#00ffaa">Bokeh</font></b>
-                            has both an imperative and a declarative interface.
-                        </p>
-
-                    </section>
-
-                    <section>
-                        <div style="width: 50%; float: left;">
-                            <div style="font-size: 25px;">
-                                  <pre style="font-size: 0.35em;">
-                                      <code class="python">
-# MATPLOTLIB
-import matplotlib.pyplot as plt
-import matplotlib
-import matplotlib.cm as cm
-import matplotlib.patches as patches
-
-N = len(data['species'].unique())
-cmap = cm.jet(pd.np.linspace(0, 1, num=N))
-colors = {k: cmap[i] for i, k in enumerate(data['species'].unique())}
-
-mmap = ['o', 's', '^']
-markers = {k: mmap[i] for i, k in enumerate(data['species'].unique())}
-
-data['color'] = data['species'].apply(lambda x: colors[x])
-data['marker'] = data['species'].apply(lambda x: markers[x])
-
-fig, ax = plt.subplots(1, 1, figsize=(7.5, 5))
-
-artists = list()
-legends = list()
-for k in data['species'].unique():
-    s = data.loc[data['species']==k]
-    a = ax.scatter(s['petal_length'],
-                    s['petal_width'],
-                    marker=markers[k],
-                    edgecolor=colors[k],
-                    facecolor=colors[k])
-    legends.append(k)
-    artists.append(a)
-
-ax.set_xlabel('petal_length')
-ax.set_ylabel('petal_width')
-ax.legend(artists, legends, loc='upper left')
-                                  </code></pre>
-                            </div>
-                        </div>
-                        <div style="float: left; width: 50%; margin-top: 4%;">
-                            <img src='./static/img/iris-matplotlib.png'>
-                        </div>
-                    </section>
-                        <section>
-                        <div style="width: 50%; float: left; margin-top: 10%">
-                            <div style="font-size: 25px;">
-                                  <pre style="font-size: 0.35em;">
-                                      <code class="python">
-from bokeh.charts import Scatter, output_notebook, show
-scatter = Scatter(data, x='petal_length', y='petal_width',
-                color='species', marker='species',
-                title='Iris Dataset Color and Marker by Species',
-                legend=True)
-show(scatter)
-                                  </code></pre>
-                            </div>
-                        </div>
-                        <div style="float: left; width: 50%">
-                            <a href="/downloads/iris_standalone.html" target="_blank">
-                                <img src="./static/img/iris-bokeh.png">
-                            </a>
-                        </div>
-                    </section>
-
-
-                    <section>
-                        <h5>A Dramatic Tour through Python's Data Visualization Landscape</h5>
-
-                        <a href="https://dansaber.wordpress.com/2016/10/02/a-dramatic-tour-through-pythons-data-visualization-landscape-including-ggplot-and-altair/">Link</a>
-                    </section>
-
-                </section>
-
-                <section>
                     <section>
                         <h2>Why
                             <b><font color="#00ffaa">Bokeh</font>?</b>
@@ -642,12 +528,121 @@ ctx.stroke();
 
                 </section>
 
+
+                </section>
+
+
                 <section>
                     <section>
                         <h2>
                             How does <b><font color="#00ffaa">Bokeh</font></b> compare to ...
                         </h2>
                     </section>
+
+                    <section>
+                        <h2 style="text-align: left;">
+                            <b>Aside</b>
+                        </h2>
+                        <div class="fragment">
+                            <p style="text-align: left;">
+                            <b><font color="#ffaa00">Imperative</font></b>
+                            <b>vs</b>
+                            <b><font color="##aa00ff">Declarative</font></b>
+                        </div>
+                    </section>
+
+                    <section>
+                        <ul>
+                            <li>
+                                <b><font color="#ffaa00">Imperative</font></b>
+                                interface: the "how"
+                                <ul>
+                                    <li>e.g. d3.js, matplotlib</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <b><font color="#0055ff">Declarative</font></b>
+                                interface: the "what"
+                                <ul>
+                                    <li>e.g. seaborn, ggplot, altair</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <p class="fragment" data-fragment-index="0">
+                            <b><font color="#00ffaa">Bokeh</font></b>
+                            has both an imperative and a declarative interface.
+                        </p>
+
+                    </section>
+
+                    <section>
+                        <div style="width: 50%; float: left;">
+                            <div style="font-size: 25px;">
+                                  <pre style="font-size: 0.35em;">
+                                      <code class="python">
+# MATPLOTLIB
+import matplotlib.pyplot as plt
+import matplotlib
+import matplotlib.cm as cm
+import matplotlib.patches as patches
+
+N = len(data['species'].unique())
+cmap = cm.jet(pd.np.linspace(0, 1, num=N))
+colors = {k: cmap[i] for i, k in enumerate(data['species'].unique())}
+
+mmap = ['o', 's', '^']
+markers = {k: mmap[i] for i, k in enumerate(data['species'].unique())}
+
+data['color'] = data['species'].apply(lambda x: colors[x])
+data['marker'] = data['species'].apply(lambda x: markers[x])
+
+fig, ax = plt.subplots(1, 1, figsize=(7.5, 5))
+
+artists = list()
+legends = list()
+for k in data['species'].unique():
+    s = data.loc[data['species']==k]
+    a = ax.scatter(s['petal_length'],
+                    s['petal_width'],
+                    marker=markers[k],
+                    edgecolor=colors[k],
+                    facecolor=colors[k])
+    legends.append(k)
+    artists.append(a)
+
+ax.set_xlabel('petal_length')
+ax.set_ylabel('petal_width')
+ax.legend(artists, legends, loc='upper left')
+                                  </code></pre>
+                            </div>
+                        </div>
+                        <div style="float: left; width: 50%; margin-top: 4%;">
+                            <img src='./static/img/iris-matplotlib.png'>
+                        </div>
+                    </section>
+                        <section>
+                        <div style="width: 50%; float: left; margin-top: 10%">
+                            <div style="font-size: 25px;">
+                                  <pre style="font-size: 0.35em;">
+                                      <code class="python">
+from bokeh.charts import Scatter, output_notebook, show
+scatter = Scatter(data, x='petal_length', y='petal_width',
+                color='species', marker='species',
+                title='Iris Dataset Color and Marker by Species',
+                legend=True)
+show(scatter)
+                                  </code></pre>
+                            </div>
+                        </div>
+                        <div style="float: left; width: 50%">
+                            <a href="/downloads/iris_standalone.html" target="_blank">
+                                <img src="./static/img/iris-bokeh.png">
+                            </a>
+                        </div>
+                    </section>
+
+
                     <section>
                         <p>
                             <a href="http://matplotlib.org/">matplotlib</a>
@@ -690,6 +685,11 @@ ctx.stroke();
                             <li>Animation/interactivity using other libraries (gganimate, shiny)</li>
                         </ul>
                     </section>
+
+                    <section>
+                        <a href="https://dansaber.wordpress.com/2016/10/02/a-dramatic-tour-through-pythons-data-visualization-landscape-including-ggplot-and-altair/"><h2>A Dramatic Tour through Python's Data Visualization Landscape</h2></a>
+                    </section>
+
                 </section>
 
                 <section>
