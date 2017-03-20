@@ -81,6 +81,7 @@
             previous_winner = msg.from;
             localStorage['scoreboard'] = JSON.stringify(scoreboard)
             resetLocation()
+            // document.getElementById('currentWinner').innerHTML = "Current winner: ***-***-" + previous_winner.slice(-4)
             document.getElementById('currentWinner').innerHTML = "Current winner: ***-***-" + previous_winner.slice(-4)
         }
         if ( mouse_source.data.x[0] == poison_source.data.x[0] && mouse_source.data.y[0] == poison_source.data.y[0] ) {
