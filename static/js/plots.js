@@ -1,8 +1,9 @@
 (function (exports) {
     var string_store = JSON.stringify({"no":{"body":["Languages: python"],"languages":["Python","matlab","javascript"],"libraries":["d3.js","matplotlib","bokeh","plotly"]}})
     var store = JSON.parse(localStorage['store'] || string_store);
-    var mouse_source = null;
-    var cheese_source = null;
+    mouse_source = null;
+    cheese_source = null;
+    poison_source = null;
     var string_scoreboard = JSON.stringify({"no": 0})
     scoreboard = JSON.parse(localStorage['scoreboard'] || string_scoreboard)
     var previous_winner = 'no'
@@ -63,52 +64,61 @@
         var initial_x = mouse_source.data.x[0]
         var initial_y = mouse_source.data.y[0]
         if (msg.body === 'up') {
-            mouse_source.data.y[0] = mouse_source.data.y[0] + .25
+            mouse_source.data.y[0] = mouse_source.data.y[0] + .5
         }
         if (msg.body === 'down') {
-            mouse_source.data.y[0] = mouse_source.data.y[0] - .25
+            mouse_source.data.y[0] = mouse_source.data.y[0] - .5
         }
         if (msg.body === 'left') {
-            mouse_source.data.x[0] = mouse_source.data.x[0] - .25
+            mouse_source.data.x[0] = mouse_source.data.x[0] - .5
         }
         if (msg.body === 'right') {
-            mouse_source.data.x[0] = mouse_source.data.x[0] + .25
+            mouse_source.data.x[0] = mouse_source.data.x[0] + .5
         }
-        if (mouse_source.data.x[0] < 0) {
-            mouse_source.data.x[0] = 0
-        }
-        if (mouse_source.data.y[0] < 0.5) {
-            mouse_source.data.y[0] = 0.5
-        }
-        if (mouse_source.data.x[0] > 5.5) {
-            mouse_source.data.x[0] = 5.5
-        }
-        if (mouse_source.data.y[0] > 3.75) {
-            mouse_source.data.y[0] = 3.75
-        }
+        boundCheck(mouse_source)
         if ( mouse_source.data.x[0] == cheese_source.data.x[0] && mouse_source.data.y[0] == cheese_source.data.y[0] ) {
-            scoreboard[msg.from] = scoreboard[msg.from] + 1
+            scoreboard[msg.from] = scoreboard[msg.from] + 2
             previous_winner = msg.from;
             localStorage['scoreboard'] = JSON.stringify(scoreboard)
             resetLocation()
             document.getElementById('currentWinner').innerHTML = "Current winner: ***-***-" + previous_winner.slice(-4)
         }
         if ( mouse_source.data.x[0] == poison_source.data.x[0] && mouse_source.data.y[0] == poison_source.data.y[0] ) {
-            scoreboard[msg.from] = scoreboard[msg.from] + 0.5
-            scoreboard[previous_winner] = scoreboard[previous_winner] - 0.5
+            scoreboard[msg.from] = scoreboard[msg.from] + 1
+            scoreboard[previous_winner] = scoreboard[previous_winner] - 1
             localStorage['scoreboard'] = JSON.stringify(scoreboard)
             resetLocation()
         }
         mouse_source.trigger('change')
     }
+    function boundCheck(source) {
+        if (source.data.x[0] < 0) {
+            source.data.x[0] = 0
+        }
+        if (source.data.y[0] < 0.5) {
+            source.data.y[0] = 1
+        }
+        if (source.data.x[0] > 5.5) {
+            source.data.x[0] = 5
+        }
+        if (source.data.y[0] > 3.75) {
+            source.data.y[0] = 3.5
+        }
+    }
 
     function resetLocation() {
-            mouse_source.data.x[0] = Math.floor(Math.random()*6*4)/4
-            mouse_source.data.y[0] = Math.floor(Math.random()*4*4)/4
-            cheese_source.data.x[0] = Math.floor(Math.random()*6*4)/4
-            cheese_source.data.y[0] = Math.floor(Math.random()*4*4)/4
-            poison_source.data.x[0] = Math.floor(Math.random()*6*4)/4
-            poison_source.data.y[0] = Math.floor(Math.random()*4*4)/4
+            mouse_source.data.x[0] = (Math.floor(Math.random()*6*2) + 1)/2
+            mouse_source.data.y[0] = (Math.floor(Math.random()*4*2) + 1)/2
+            cheese_source.data.x[0] = (Math.floor(Math.random()*6*2)+ 1)/2
+            cheese_source.data.y[0] = (Math.floor(Math.random()*4*2) + 1)/2
+            poison_source.data.x[0] = (Math.floor(Math.random()*6*2) + 1)/2
+            poison_source.data.y[0] = (Math.floor(Math.random()*4*2) + 1)/2
+            boundCheck(mouse_source)
+            boundCheck(cheese_source)
+            boundCheck(poison_source)
+            mouse_source.trigger('change')
+            cheese_source.trigger('change')
+            poison_source.trigger('change')
     }
 
     function surveyPlot() {
@@ -482,6 +492,7 @@
     }
 
     exports.smsCallback = smsCallback
+    exports.resetLocation = resetLocation
     exports.smsMazeCallback = smsMazeCallback
     exports.titlePlot = titlePlot
     exports.largeDataPlot = largeDataPlot
