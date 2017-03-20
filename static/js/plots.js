@@ -1,6 +1,92 @@
 (function (exports) {
     var string_store = JSON.stringify({"no":{"body":["Languages: python"],"languages":["Python","matlab","javascript"],"libraries":["d3.js","matplotlib","bokeh","plotly"]}})
-    var store = JSON.parse(localStorage['store'] || string_store)
+    var store = JSON.parse(localStorage['store'] || string_store);
+    var mouse_source = null;
+    var cheese_source = null;
+
+    function mazePlot() {
+        var plt = Bokeh.Plotting
+
+          xdr = new Bokeh.DataRange1d({
+            start: 0,
+            end: 6
+          });
+          ydr = new Bokeh.DataRange1d({
+            start: 0,
+            end: 4
+          });
+        // set up some data
+        // create a data source
+        mouse_source = new Bokeh.ColumnDataSource({
+            data: {url: ['static/img/mouse.jpeg'], x: [.75], y: [1.25],
+                    w: [.5], h: [.5],}
+        });
+        cheese_source = new Bokeh.ColumnDataSource({
+            data: {url: ['static/img/cheese.png'], x: [4.75], y: [1.25],
+                    w: [.5], h: [.5],}
+        });
+
+        mouse_source.data.x[0] = Math.floor(Math.random()*6*4)/4
+        mouse_source.data.y[0] = Math.floor(Math.random()*4*4)/4
+        cheese_source.data.x[0] = Math.floor(Math.random()*6*4)/4
+        cheese_source.data.y[0] = Math.floor(Math.random()*4*4)/4
+        // make a figure
+        var p = plt.figure({width: 600, height: 400, x_range: xdr, y_range: ydr, tools: false,});
+
+        p.image_url({'field': 'url'}, {'field': 'x'}, {'field': 'y'}, {'field': 'w'}, {'field': 'h'}, {source: mouse_source})
+        p.image_url({'field': 'url'}, {'field': 'x'}, {'field': 'y'}, {'field': 'w'}, {'field': 'h'}, {source: cheese_source})
+
+        // p._xaxis.visible = false;
+        // p._yaxis.visible = false;
+        // p.xgrid.visible = false; // grid_line_color = 'white';
+        // p.ygrid.visible = false; // .grid_line_color = 'white';
+        p.background_fill_color = "#ffffff"
+        p.border_fill_color = "#222222"
+
+        // add the plot to a document and display it
+        var doc = new Bokeh.Document();
+        doc.add_root(p);
+        var div = document.getElementById("plotMazeSlide");
+        Bokeh.embed.add_document_standalone(doc, div);
+
+    }
+
+    function smsMazeCallback(msg) {
+        var initial_x = mouse_source.data.x[0]
+        var initial_y = mouse_source.data.y[0]
+        if (msg.body === 'up') {
+            mouse_source.data.y[0] = mouse_source.data.y[0] + .25
+        }
+        if (msg.body === 'down') {
+            mouse_source.data.y[0] = mouse_source.data.y[0] - .25
+        }
+        if (msg.body === 'left') {
+            mouse_source.data.x[0] = mouse_source.data.x[0] - .25
+        }
+        if (msg.body === 'right') {
+            mouse_source.data.x[0] = mouse_source.data.x[0] + .25
+        }
+        if (mouse_source.data.x[0] < 0) {
+            mouse_source.data.x[0] = 0
+        }
+        if (mouse_source.data.y[0] < 0.5) {
+            mouse_source.data.y[0] = 0.5
+        }
+        if (mouse_source.data.x[0] > 5.5) {
+            mouse_source.data.x[0] = 5.5
+        }
+        if (mouse_source.data.y[0] > 3.75) {
+            mouse_source.data.y[0] = 3.75
+        }
+        if ( mouse_source.data.x[0] == cheese_source.data.x[0] && mouse_source.data.y[0] == cheese_source.data.y[0] ) {
+            mouse_source.data.x[0] = Math.floor(Math.random()*6*4)/4
+            mouse_source.data.y[0] = Math.floor(Math.random()*4*4)/4
+            cheese_source.data.x[0] = Math.floor(Math.random()*6*4)/4
+            cheese_source.data.y[0] = Math.floor(Math.random()*4*4)/4
+        }
+
+        mouse_source.trigger('change')
+    }
 
     function surveyPlot() {
 
@@ -373,8 +459,10 @@
     }
 
     exports.smsCallback = smsCallback
+    exports.smsMazeCallback = smsMazeCallback
     exports.titlePlot = titlePlot
     exports.largeDataPlot = largeDataPlot
+    exports.mazePlot = mazePlot
     exports.surveyPlot = surveyPlot
     window.store = store
 

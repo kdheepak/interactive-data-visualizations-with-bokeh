@@ -3,6 +3,7 @@
     plots.titlePlot()
     plots.surveyPlot()
     plots.largeDataPlot()
+    plots.mazePlot()
 
     sms.smsListener()
 

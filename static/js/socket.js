@@ -25,7 +25,12 @@
             sms = JSON.parse(msg)
             var state = Reveal.getState();
             data[[state.indexh, state.indexv]].push(sms)
-            plots.smsCallback(sms)
+            if ( sms.body === 'up' || sms.body === 'down' || sms.body === 'left' || sms.body === 'right' ) {
+                plots.smsMazeCallback(sms)
+            }
+            else {
+                plots.smsCallback(sms)
+            }
         });
 
         Reveal.addEventListener( 'slidechanged', function( event ) {
