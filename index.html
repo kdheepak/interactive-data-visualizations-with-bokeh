@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="static/css/main.css">
 
         <!-- Code syntax highlighting -->
-        <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+        <link rel="stylesheet" href="reveal.js/lib/css/solarized.css">
 
         <!-- Printing and PDF exports -->
         <script>
@@ -289,9 +289,9 @@
 
                     <section>
                         <div style="width: 50%; float: left;">
-                            <div style="font-size: 25px; margin-top: 50px">
+                            <div style="font-size: 25px;">
                                   <pre style="font-size: 0.35em;">
-                                      <code>
+                                      <code class="python">
 # MATPLOTLIB
 import matplotlib.pyplot as plt
 import matplotlib
@@ -328,15 +328,15 @@ ax.legend(artists, legends, loc='upper left')
                                   </code></pre>
                             </div>
                         </div>
-                        <div style="float: left; width: 50%">
+                        <div style="float: left; width: 50%; margin-top: 4%;">
                             <img src='./static/img/iris-matplotlib.png'>
                         </div>
                     </section>
                         <section>
-                        <div style="width: 50%; float: left;">
-                            <div style="font-size: 25px; margin-top: 50px">
+                        <div style="width: 50%; float: left; margin-top: 10%">
+                            <div style="font-size: 25px;">
                                   <pre style="font-size: 0.35em;">
-                                      <code>
+                                      <code class="python">
 from bokeh.charts import Scatter, output_notebook, show
 scatter = Scatter(data, x='petal_length', y='petal_width',
                 color='species', marker='species',
@@ -397,7 +397,7 @@ show(scatter)
                             Install <b><font color="#00ffaa">Bokeh</font></b>
                         </h2>
                                   <pre style="font-size: 0.35em;">
-                                      <code>
+                                      <code class="bash">
 ### Install Anaconda/Miniconda
 ### Open Terminal on Mac or Command Prompt on Windows
 conda install bokeh
@@ -417,7 +417,7 @@ pip install jupyter # (optional but recommended)
                             <a href="https://github.com/kdheepak/interactive-data-visualizations-with-bokeh">Download notebooks</a> or Clone repository
                         </h2>
                                   <pre style="font-size: 0.35em;">
-                                      <code>
+                                      <code class="bash">
 git clone https://github.com/kdheepak/interactive-data-visualizations-with-bokeh.git
 cd interactive-data-visualizations-with-bokeh
 cd notebooks
@@ -496,8 +496,8 @@ cd notebooks
                             <b><font color="#00ffaa">Bokeh</font></b>
                             Python
                         </p>
-                        <div style="width: 20%; float: left;">
-                            <div style="font-size: 25px; margin-top: 50px">
+                        <div style="width: 20%; float: left; margin-top: 20%">
+                            <div style="font-size: 25px;">
                                 <ul>
                                     <li>Generates the JSON "scenegraph"</li>
                                 </ul>
@@ -506,14 +506,14 @@ cd notebooks
                         </div>
                         <div style="float: left; width: 80%">
                             <pre style="font-size: 0.35em;">
-                                <code>
+                                <code class="python">
 from bokeh.plotting import figure
 p = figure(width=300, height=300)
 p.to_json(include_defaults=False)
                                 </code>
                             </pre>
                             <pre style="font-size: 0.35em;">
-                                <code>
+                                <code class="python">
 {u'below': [{u'id': u'f06c6d6c-4f5f-498d-8c0e-1462aa483c72', u'type': u'LinearAxis'}],
  u'id': u'e5f5ef3e-308b-4f5d-9e0f-cf6cd7d9c3b6',
  u'left': [{u'id': u'5ebe63b6-f974-40bd-906e-38e4bbd3336c', u'type': u'LinearAxis'}],
@@ -557,21 +557,21 @@ p.to_json(include_defaults=False)
                         <p>
                             <b><font color="#00ffaa">Bokeh</font> and <a href="https://www.w3schools.com/html/html5_canvas.asp">Canvas</a></b>
                         </p>
-                        <div style="width: 50%; float: left;">
-                            <pre style="font-size: 0.35em;">
-                                <code>
+                        <div>
+                            <div style="position: absolute; width: 50%; left: 0%">
+                                <pre style="font-size: 0.35em;">
+                                    <code class="javascript">
 //javascript
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 ctx.beginPath();
 ctx.arc(95,50,40,0,2*Math.PI);
 ctx.stroke();
-                                </code>
-                            </pre>
-                        </div>
-                        <div style="float: left; width: 50%">
-                            <div style="font-size: 25px; margin-top: 50px">
-                                <canvas id="myCanvas" width="200" height="100"></canvas>
+                                    </code>
+                                </pre>
+                            </div>
+                            <div style="position: absolute; width: 50%; left: 50%; margin-top:5%">
+                                    <canvas id="myCanvas" width="200" height="100"></canvas>
                             </div>
                         </div>
                     </section>
