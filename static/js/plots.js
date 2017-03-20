@@ -36,10 +36,10 @@
         p.image_url({'field': 'url'}, {'field': 'x'}, {'field': 'y'}, {'field': 'w'}, {'field': 'h'}, {source: mouse_source})
         p.image_url({'field': 'url'}, {'field': 'x'}, {'field': 'y'}, {'field': 'w'}, {'field': 'h'}, {source: cheese_source})
 
-        // p._xaxis.visible = false;
-        // p._yaxis.visible = false;
-        // p.xgrid.visible = false; // grid_line_color = 'white';
-        // p.ygrid.visible = false; // .grid_line_color = 'white';
+        p._xaxis.visible = false;
+        p._yaxis.visible = false;
+        p.xgrid.visible = false; // grid_line_color = 'white';
+        p.ygrid.visible = false; // .grid_line_color = 'white';
         p.background_fill_color = "#ffffff"
         p.border_fill_color = "#222222"
 
