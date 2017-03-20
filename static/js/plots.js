@@ -3,6 +3,9 @@
     var store = JSON.parse(localStorage['store'] || string_store);
     var mouse_source = null;
     var cheese_source = null;
+    var string_scoreboard = JSON.stringify({"no": 0})
+    scoreboard = JSON.parse(localStorage['scoreboard'] || string_scoreboard)
+    var previous_winner = 'no'
 
     function mazePlot() {
         var plt = Bokeh.Plotting
@@ -25,16 +28,18 @@
             data: {url: ['static/img/cheese.png'], x: [4.75], y: [1.25],
                     w: [.5], h: [.5],}
         });
+        poison_source = new Bokeh.ColumnDataSource({
+            data: {url: ['static/img/poison.png'], x: [4.75], y: [3.25],
+                    w: [.5], h: [.5],}
+        });
 
-        mouse_source.data.x[0] = Math.floor(Math.random()*6*4)/4
-        mouse_source.data.y[0] = Math.floor(Math.random()*4*4)/4
-        cheese_source.data.x[0] = Math.floor(Math.random()*6*4)/4
-        cheese_source.data.y[0] = Math.floor(Math.random()*4*4)/4
+        resetLocation()
         // make a figure
         var p = plt.figure({width: 600, height: 400, x_range: xdr, y_range: ydr, tools: false,});
 
         p.image_url({'field': 'url'}, {'field': 'x'}, {'field': 'y'}, {'field': 'w'}, {'field': 'h'}, {source: mouse_source})
         p.image_url({'field': 'url'}, {'field': 'x'}, {'field': 'y'}, {'field': 'w'}, {'field': 'h'}, {source: cheese_source})
+        p.image_url({'field': 'url'}, {'field': 'x'}, {'field': 'y'}, {'field': 'w'}, {'field': 'h'}, {source: poison_source})
 
         p._xaxis.visible = false;
         p._yaxis.visible = false;
@@ -52,6 +57,9 @@
     }
 
     function smsMazeCallback(msg) {
+        if (scoreboard[msg.from] === undefined) {
+            scoreboard[msg.from] = 0
+        }
         var initial_x = mouse_source.data.x[0]
         var initial_y = mouse_source.data.y[0]
         if (msg.body === 'up') {
@@ -79,13 +87,28 @@
             mouse_source.data.y[0] = 3.75
         }
         if ( mouse_source.data.x[0] == cheese_source.data.x[0] && mouse_source.data.y[0] == cheese_source.data.y[0] ) {
+            scoreboard[msg.from] = scoreboard[msg.from] + 1
+            previous_winner = msg.from;
+            localStorage['scoreboard'] = JSON.stringify(scoreboard)
+            resetLocation()
+            document.getElementById('currentWinner').innerHTML = "Current winner: ***-***-" + previous_winner.slice(-4)
+        }
+        if ( mouse_source.data.x[0] == poison_source.data.x[0] && mouse_source.data.y[0] == poison_source.data.y[0] ) {
+            scoreboard[msg.from] = scoreboard[msg.from] + 0.5
+            scoreboard[previous_winner] = scoreboard[previous_winner] - 0.5
+            localStorage['scoreboard'] = JSON.stringify(scoreboard)
+            resetLocation()
+        }
+        mouse_source.trigger('change')
+    }
+
+    function resetLocation() {
             mouse_source.data.x[0] = Math.floor(Math.random()*6*4)/4
             mouse_source.data.y[0] = Math.floor(Math.random()*4*4)/4
             cheese_source.data.x[0] = Math.floor(Math.random()*6*4)/4
             cheese_source.data.y[0] = Math.floor(Math.random()*4*4)/4
-        }
-
-        mouse_source.trigger('change')
+            poison_source.data.x[0] = Math.floor(Math.random()*6*4)/4
+            poison_source.data.y[0] = Math.floor(Math.random()*4*4)/4
     }
 
     function surveyPlot() {
