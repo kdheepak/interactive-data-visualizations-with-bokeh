@@ -19,7 +19,6 @@
         <script src="reveal.js/lib/js/head.min.js"></script>
         <script src="reveal.js/js/reveal.js"></script>
 
-
         <script src="static/js/bokeh-0.12.4.js"></script>
         <script src="static/js/bokeh-widgets-0.12.4.js"></script>
         <script src="static/js/bokeh-api-0.12.4.js"></script>
@@ -114,6 +113,24 @@
                                 <div id="plotSurveySlide" class="bk-plotdiv"></div>
                             </div>
                         </div>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2 style="text-shadow: 1.5px 0 0 #000, 0 -1.5px 0 #000, 0 1.5px 0 #000, -1.5px 0 0 #000; z-index: 0;">
+                            Agenda
+                        </h2>
+                        <ul>
+                            <li>What is Bokeh</li>
+                            <li>Why Bokeh</li>
+                            <li>Live Demo</li>
+                            <li>How Bokeh works</li>
+                            <li>How Bokeh compares to ...</li>
+                            <li>Getting started with Bokeh</li>
+                            <li>Additional features</li>
+                        </ul>
+
                     </section>
                 </section>
 
@@ -469,6 +486,13 @@ cd notebooks
                                 </a>
                             </p>
                     </section>
+                    <section>
+                            <p>
+                                <a href="http://nbviewer.jupyter.org/github/kdheepak/interactive-data-visualizations-with-bokeh/blob/gh-pages/notebooks/Linked-CustomHoverTool.ipynb">
+                                    Live Demo #5 - Subclassing Models
+                                </a>
+                            </p>
+                    </section>
                 </section>
 
                 <section>
@@ -546,10 +570,12 @@ p.to_json(include_defaults=False)
                             Models and Views
                         </p>
                             <ul>
-                                <li>Based on Backbone.js</li>
-                                <li>Backbone Models store the state (data)</li>
-                                <li>Backbone Views know how to render the state (canvas API)</li>
-                                <li>Views listen to events and render on change</li>
+                                <li>Based on <a href="http://backbonejs.org/">Backbone.js</a></li>
+                                <li><a href="https://github.com/bokeh/bokeh/blob/3995f0/bokehjs/src/coffee/core/bokeh_view.coffee">BokehView</a> inherits from Backbone.View</li>
+                                <li><a href="https://github.com/bokeh/bokeh/blob/3995f0/bokehjs/src/coffee/core/has_props.coffee">HasProps</a> inherits from Backbone.Model</li>
+                                <li>Bokeh Models store the state</li>
+                                <li>Bokeh Views know how to render the state</li>
+                                <li>Views can listen to events and render on change</li>
                             </ul>
                     </section>
 
@@ -574,6 +600,17 @@ ctx.stroke();
                                     <canvas id="myCanvas" width="200" height="100"></canvas>
                             </div>
                         </div>
+                    </section>
+
+                    <section>
+                        <p>
+                            <b><font color="#00ffaa">Bokeh</font>JS</b>
+                            is not actually JS
+                        </p>
+                        <ul>
+                            <li>Written primarily in <a href="http://coffeescript.org/">CoffeeScript</a></li>
+                            <li>Bokeh <a href="http://bokehplots.com/pages/roadmap.html">Roadmap</a> lists migration to <a href="https://www.typescriptlang.org/">TypeScript</a></li> as a core improvement
+                        </ul>
                     </section>
 
                     <section>
@@ -641,6 +678,12 @@ ctx.stroke();
                 <section>
                     <section>
                         <h2>
+                            Getting started with <b><font color="#00ffaa">Bokeh</font></b>
+                        </h2>
+                    </section>
+
+                    <section>
+                        <h2>
                             <b><font color="#00ffaa">Bokeh</font></b>
                             <a href="http://bokeh.pydata.org/en/latest/docs/user_guide/charts.html">High Level Interface</a>
                         </h2>
@@ -651,7 +694,15 @@ ctx.stroke();
                             <b><font color="#00ffaa">Bokeh</font></b>
                             <a href="http://bokeh.pydata.org/en/latest/docs/reference/models.html">Low Level Interface</a>
                         </h2>
-                        <p class="fragment"> One to one mapping between Python and Javascript models</p>
+                        <div class="fragment">
+                            <p>
+                                One to one mapping between Python and Javascript models
+                            </p>
+                            <ul>
+                                <li><a href="https://github.com/bokeh/bokeh/blob/3713a96/bokehjs/src/coffee/models/glyphs/circle.coffee">BokehJS Circle Model</a></li>
+                                <li><a href="https://github.com/bokeh/bokeh/blob/3713a96/bokeh/models/markers.py#L88">Bokeh Python Circle Model</a></li>
+                            </ul>
+                        </div>
                     </section>
 
                     <section>
@@ -663,6 +714,12 @@ ctx.stroke();
                 </section>
 
                 <section>
+                    <section>
+                        <h2>
+                            Additional features <b><font color="#00ffaa">Bokeh</font></b>
+                        </h2>
+                    </section>
+
                     <section>
                         <h2>
                             <b><font color="#00ffaa">Bokeh</font></b>
