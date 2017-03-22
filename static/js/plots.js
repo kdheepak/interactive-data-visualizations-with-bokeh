@@ -365,7 +365,7 @@
             }
             store[msg.from]['languages'] = l.filter( onlyUnique )
         }
-        if (body.toLowerCase().includes('libraries:')) {
+        elif (body.toLowerCase().includes('libraries:')) {
             var l = body.split(":")[1].trim().replace(/\,$/, '').split(',').filter( onlyUnique ).filter(String)
             for(var i=0; (i<l.length && i<10); i++){
                 if(l[i].length>10) {
